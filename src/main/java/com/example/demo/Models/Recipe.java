@@ -1,0 +1,115 @@
+package com.example.demo.Models;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+@Entity
+public class Recipe {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
+	
+	private String title;
+	private String ingredients;
+	private String steps;
+	private String cooking_time;
+	private String difficulty;
+	private String image;
+	
+	@CreationTimestamp
+	private LocalDateTime datetime;
+
+	public Recipe(String cooking_time, LocalDateTime datetime, String difficulty, Integer id, String image, String ingredients, String steps, String title) {
+		this.cooking_time = cooking_time;
+		this.datetime = datetime;
+		this.difficulty = difficulty;
+		this.id = id;
+		this.image = image;
+		this.ingredients = ingredients;
+		this.steps = steps;
+		this.title = title;
+	}
+
+	public String getCooking_time() {
+		return cooking_time;
+	}
+
+	public void setCooking_time(String cooking_time) {
+		this.cooking_time = cooking_time;
+	}
+
+	public LocalDateTime getDatetime() {
+		return datetime;
+	}
+
+	public void setDatetime(LocalDateTime datetime) {
+		this.datetime = datetime;
+	}
+
+	public String getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(String difficulty) {
+		this.difficulty = difficulty;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(String ingredients) {
+		this.ingredients = ingredients;
+	}
+
+	public String getSteps() {
+		return steps;
+	}
+
+	public void setSteps(String steps) {
+		this.steps = steps;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	@Override
+	public String toString() {
+		return "Recipe{" +
+				"cooking_time='" + cooking_time + '\'' +
+				", id=" + id +
+				", title='" + title + '\'' +
+				", ingredients='" + ingredients + '\'' +
+				", steps='" + steps + '\'' +
+				", difficulty='" + difficulty + '\'' +
+				", image='" + image + '\'' +
+				", datetime=" + datetime +
+				'}';
+	}
+}
