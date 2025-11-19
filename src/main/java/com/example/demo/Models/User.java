@@ -26,6 +26,11 @@ public class User{
         this.isBlock = isBlock;
         this.isAdmin = isAdmin;
     }
+
+    public User() {
+
+    }
+
     public Integer getId() {
         return id;
     }
