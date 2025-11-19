@@ -10,8 +10,8 @@ public class AdminController {
     public String home() {
         return "Admin";
     }
-    
-	
+
+
     @GetMapping("/login")
     public String login() {
         return "Login";

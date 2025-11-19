@@ -21,7 +21,7 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
 
-    @PostMapping("/register")
+    @PostMapping("/signup")
     public ResponseEntity<?> register(@RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
