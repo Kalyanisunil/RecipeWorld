@@ -1,5 +1,4 @@
-package com.example.demo.Configurations;
-
+package com.example.demo.configurations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 import com.example.demo.Services.CustomUserDetailsService;
 
@@ -31,15 +30,18 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(request -> request
                         // Public endpoints
-                        .requestMatchers("/login", "/registration", "/css/**", "/js/**", "/bookmarks/public").permitAll()
+                        .requestMatchers("/api/**","/login", "/registration", "/css/**", "/js/**", "/bookmarks/public").permitAll()
                         .anyRequest().authenticated()) // All other requests require authentication
                 .formLogin(form -> form
                         .loginPage("/login").loginProcessingUrl("/login")
                         .defaultSuccessUrl("/bookmarks/my", true).permitAll()) // Redirect to private view after login
                 .logout(logout -> logout
-                        .invalidateHttpSession(true).clearAuthentication(true)
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .logoutSuccessUrl("/login?logout").permitAll());
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .permitAll()
+                );
 
         // CRITICAL: The line that added ApiAuthenticationFilter is removed.
 
