@@ -17,14 +17,16 @@ public class User{
     private String password;
     private Boolean isBlock;
     private Boolean isAdmin;
-    public User(Integer id, String name, String email, String password, Boolean isBlock, Boolean isAdmin) {
-        super();
-        this.id = id;
-        this.name = name;
+    private String token;
+
+    public User(String email, Integer id, Boolean isAdmin, Boolean isBlock, String name, String password, String token) {
         this.email = email;
-        this.password = password;
-        this.isBlock = isBlock;
+        this.id = id;
         this.isAdmin = isAdmin;
+        this.isBlock = isBlock;
+        this.name = name;
+        this.password = password;
+        this.token = token;
     }
 
     public User() {
@@ -66,6 +68,14 @@ public class User{
     }
     public void setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override
