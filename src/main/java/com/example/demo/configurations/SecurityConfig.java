@@ -1,4 +1,5 @@
 package com.example.demo.configurations;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,8 +9,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
+import com.example.demo.security.ApiAuthenticationFilter;
 import com.example.demo.Services.CustomUserDetailsService;
 
 @Configuration
@@ -17,36 +20,39 @@ import com.example.demo.Services.CustomUserDetailsService;
 public class SecurityConfig {
 
     @Autowired
+    ApiAuthenticationFilter apiAuthenticationFilter;
+
+    @Autowired
     CustomUserDetailsService customUserDetailsService;
-    // Removed dependency on ApiAuthenticationFilter
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(request -> request
-                        // Public endpoints
-                        .requestMatchers("/api/**","/login", "/registration", "/css/**", "/js/**", "/bookmarks/public").permitAll()
-                        .anyRequest().authenticated()) // All other requests require authentication
+                        .requestMatchers("/login", "/registration", "/css/**", "/js/**", "/api/**").permitAll() // Public endpoints
+                        .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login").loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/bookmarks/my", true).permitAll()) // Redirect to private view after login
+                        .defaultSuccessUrl("/create", true).permitAll()) // Form login settings
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .permitAll()
-                );
-
-        // CRITICAL: The line that added ApiAuthenticationFilter is removed.
+                ); // Logout settings
+        http.addFilterBefore(apiAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
+
 
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
