@@ -1,9 +1,8 @@
 package com.example.demo.Models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity
@@ -18,6 +17,9 @@ public class User{
     private Boolean isBlock;
     private Boolean isAdmin;
     private String token;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Recipe> recipes;
 
     public User(String email, Integer id, Boolean isAdmin, Boolean isBlock, String name, String password, String token) {
         this.email = email;
