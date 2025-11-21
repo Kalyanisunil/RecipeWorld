@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 
 import com.example.demo.Models.Recipe;
+import com.example.demo.Models.User;
 import com.example.demo.Repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,4 +22,6 @@ public class RecipeController {
     List<Recipe> getAllRecipes() {
         return repo.findAll();
     }
+
+
 }

@@ -26,7 +26,7 @@ public class Recipe {
 	@JoinColumn(name = "user_id")  // this creates the foreign key column in DB
 	private User user;
 
-	public Recipe(String cooking_time, LocalDateTime datetime, String difficulty, Integer id, String image, String ingredients, String steps, String title) {
+	public Recipe(String cooking_time, LocalDateTime datetime, String difficulty, Integer id, String image, String ingredients, String steps, String title, User user) {
 		this.cooking_time = cooking_time;
 		this.datetime = datetime;
 		this.difficulty = difficulty;
@@ -35,6 +35,15 @@ public class Recipe {
 		this.ingredients = ingredients;
 		this.steps = steps;
 		this.title = title;
+		this.user = user;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Recipe() {
@@ -115,6 +124,7 @@ public class Recipe {
 				", difficulty='" + difficulty + '\'' +
 				", image='" + image + '\'' +
 				", datetime=" + datetime +
+				", user=" + user +
 				'}';
 	}
 }
