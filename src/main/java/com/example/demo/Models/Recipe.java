@@ -1,9 +1,7 @@
 package com.example.demo.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,6 +21,10 @@ public class Recipe {
 	
 	@CreationTimestamp
 	private LocalDateTime datetime;
+
+	@ManyToOne
+	@JoinColumn(name = "id")  // this creates the foreign key column in DB
+	private User user;
 
 	public Recipe(String cooking_time, LocalDateTime datetime, String difficulty, Integer id, String image, String ingredients, String steps, String title) {
 		this.cooking_time = cooking_time;
