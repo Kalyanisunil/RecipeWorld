@@ -35,6 +35,9 @@ public class Recipe {
 		this.title = title;
 	}
 
+	public Recipe() {
+	}
+
 	public String getCooking_time() {
 		return cooking_time;
 	}
