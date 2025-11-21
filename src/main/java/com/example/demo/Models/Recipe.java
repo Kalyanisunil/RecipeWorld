@@ -23,7 +23,7 @@ public class Recipe {
 	private LocalDateTime datetime;
 
 	@ManyToOne
-	@JoinColumn(name = "id")  // this creates the foreign key column in DB
+	@JoinColumn(name = "user_id")  // this creates the foreign key column in DB
 	private User user;
 
 	public Recipe(String cooking_time, LocalDateTime datetime, String difficulty, Integer id, String image, String ingredients, String steps, String title) {
