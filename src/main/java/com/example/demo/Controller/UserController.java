@@ -15,7 +15,7 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/recipes")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
