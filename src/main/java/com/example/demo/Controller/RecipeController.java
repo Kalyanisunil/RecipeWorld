@@ -6,10 +6,7 @@ import com.example.demo.Models.Recipe;
 import com.example.demo.Models.User;
 import com.example.demo.Repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +28,13 @@ public class RecipeController {
         Recipe recipe = repo.findById(id)
                 .orElseThrow(() -> new RecipeNotFoundException(id));
         return List.of(recipe);
+    }
+
+
+
+    @PostMapping("addRecipe")
+    Recipe newRecipe(@RequestBody Recipe newRecipe) {
+        return repo.save(newRecipe);
     }
 
 }
