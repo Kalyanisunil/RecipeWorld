@@ -6,6 +6,7 @@ import com.example.demo.Models.Recipe;
 import com.example.demo.Models.User;
 import com.example.demo.Repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class RecipeController {
         return repo.save(newRecipe);
     }
 
+
     @DeleteMapping("/deleteproduct/{id}")
     String deleteRecipe(@PathVariable Integer id){
         if(!repo.existsById(id)){
@@ -46,4 +48,8 @@ public class RecipeController {
         return  "Recipe with id "+id+" has been deleted successfully.";
     }
 
+    @GetMapping("/search")
+    public List<Recipe> searchProducts(@RequestParam String title) {
+        return repo.findAllByTitleContainingIgnoreCase(title);
+    }
 }

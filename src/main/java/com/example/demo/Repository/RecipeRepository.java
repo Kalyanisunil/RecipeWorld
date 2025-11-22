@@ -14,4 +14,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     List<Recipe> findAll();
 
 
+    List<Recipe> findAllByTitle(String title);
+
+    List<Recipe> findAllByTitleContainingIgnoreCase(String title);
 }
