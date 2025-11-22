@@ -37,4 +37,13 @@ public class RecipeController {
         return repo.save(newRecipe);
     }
 
+    @DeleteMapping("/deleteproduct/{id}")
+    String deleteRecipe(@PathVariable Integer id){
+        if(!repo.existsById(id)){
+            throw new RecipeNotFoundException(id);
+        }
+        repo.deleteById(id);
+        return  "Recipe with id "+id+" has been deleted successfully.";
+    }
+
 }
