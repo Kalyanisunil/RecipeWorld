@@ -39,7 +39,7 @@ public class RecipeController {
     }
 
 
-    @DeleteMapping("/deleteproduct/{id}")
+    @DeleteMapping("/deleterecipe/{id}")
     String deleteRecipe(@PathVariable Integer id){
         if(!repo.existsById(id)){
             throw new RecipeNotFoundException(id);
