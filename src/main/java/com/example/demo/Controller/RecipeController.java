@@ -33,7 +33,7 @@ public class RecipeController {
 
 
 
-    @PostMapping("addRecipe")
+    @PostMapping("/addRecipe")
     Recipe newRecipe(@RequestBody Recipe newRecipe) {
         return repo.save(newRecipe);
     }
@@ -53,3 +53,4 @@ public class RecipeController {
         return repo.findAllByTitleContainingIgnoreCase(title);
     }
 }
+
