@@ -29,12 +29,11 @@ public class RecipeController {
         return repo.findAll();
     }
 
+
     @GetMapping("/recipe/{id}")
-    List<Recipe> getRecipesById(@PathVariable Integer id)
-    {
-        Recipe recipe = repo.findById(id)
+    public Recipe getRecipeById(@PathVariable Integer id) {
+        return repo.findById(id)
                 .orElseThrow(() -> new RecipeNotFoundException(id));
-        return List.of(recipe);
     }
 
 
