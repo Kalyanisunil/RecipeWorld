@@ -3,6 +3,8 @@ package com.example.demo.Models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 @Entity
@@ -89,8 +91,12 @@ public class Recipe {
 		this.image = image;
 	}
 
-	public String getIngredients() {
-		return ingredients;
+	public List<String> getIngredients() {
+		if (ingredients == null) return List.of();
+		return Arrays.stream(ingredients.split("\n"))
+				.map(String::trim)
+				.filter(s -> !s.isEmpty())
+				.toList();
 	}
 
 	public void setIngredients(String ingredients) {
