@@ -103,9 +103,14 @@ public class Recipe {
 		this.ingredients = ingredients;
 	}
 
-	public String getSteps() {
-		return steps;
+	public List<String> getSteps() {
+		if (steps == null) return List.of();
+		return Arrays.stream(steps.split("\n"))
+				.map(String::trim)
+				.filter(s -> !s.isEmpty())
+				.toList();
 	}
+
 
 	public void setSteps(String steps) {
 		this.steps = steps;
