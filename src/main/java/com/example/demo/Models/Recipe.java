@@ -40,6 +40,8 @@ public class Recipe {
 		this.user = user;
 	}
 
+
+
 	public User getUser() {
 		return user;
 	}
