@@ -44,7 +44,7 @@ public class UserController {
         }
 
 
-        if (!user.getPassword().equals(loginRequest.getPassword())) {
+        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             return ResponseEntity.status(401).body("Invalid password");
         }
 
