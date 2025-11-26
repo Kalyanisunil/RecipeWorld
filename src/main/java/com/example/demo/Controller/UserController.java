@@ -36,17 +36,21 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User loginRequest) {
 
+
         User user = userRepository.findByEmail(loginRequest.getEmail());
 
         if (user == null) {
             return ResponseEntity.status(401).body("Invalid email");
         }
 
+
         if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             return ResponseEntity.status(401).body("Invalid password");
         }
 
-        String token = tokenGenerator.generateToken(user.getId(), user.getEmail());
+
+        String token = tokenGenerator.generateToken(user.getEmail(), user.getPassword());
+
 
         return ResponseEntity.ok(Map.of(
                 "token", token,

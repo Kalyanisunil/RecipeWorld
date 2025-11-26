@@ -35,7 +35,7 @@ public class User{
 
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     public void setId(Integer id) {
