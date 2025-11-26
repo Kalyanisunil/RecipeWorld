@@ -53,8 +53,8 @@ public class UserController {
 
 
         return ResponseEntity.ok(Map.of(
-                "token", token,
-                "userId", user.getId()
+                "token", token
+
         ));
     }
 
