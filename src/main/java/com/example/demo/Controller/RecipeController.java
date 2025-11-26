@@ -56,5 +56,10 @@ public class RecipeController {
     public List<Recipe> searchProducts(@RequestParam String title) {
         return repo.findAllByTitleContainingIgnoreCase(title);
     }
+
+    @GetMapping("/user/{userId}")
+    public List<Recipe> getUserRecipes(@PathVariable Long userId) {
+        return repo.findByUserId(userId);
+    }
 }
 
