@@ -13,7 +13,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     @Override
     List<Recipe> findAll();
 
-
+    List<Recipe> findByUserId(Long userId);
     List<Recipe> findAllByTitle(String title);
 
     List<Recipe> findAllByTitleContainingIgnoreCase(String title);
