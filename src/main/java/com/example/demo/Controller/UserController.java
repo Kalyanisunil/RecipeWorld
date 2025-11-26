@@ -34,11 +34,28 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
-        String token = tokenGenerator.generateToken(user.getEmail(), user.getPassword());
-        if (token != null) {
-            return ResponseEntity.ok(Map.of("token", token));
+    public ResponseEntity<?> login(@RequestBody User loginRequest) {
+
+
+        User user = userRepository.findByEmail(loginRequest.getEmail());
+
+        if (user == null) {
+            return ResponseEntity.status(401).body("Invalid email");
         }
-        return ResponseEntity.status(401).body("Invalid credentials");
+
+
+        if (!user.getPassword().equals(loginRequest.getPassword())) {
+            return ResponseEntity.status(401).body("Invalid password");
+        }
+
+
+        String token = tokenGenerator.generateToken(user.getEmail(), user.getPassword());
+
+
+        return ResponseEntity.ok(Map.of(
+                "token", token,
+                "userId", user.getId()
+        ));
     }
+
 }
