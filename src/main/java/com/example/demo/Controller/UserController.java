@@ -50,12 +50,13 @@ public class UserController {
 
 
         String token = tokenGenerator.generateToken(user.getEmail(), user.getPassword());
+        System.out.println(user.getId());
 
-
-        return ResponseEntity.ok(Map.of(
-                "token", token,
-                "userId", user.getId()
-        ));
+//        return ResponseEntity.ok(Map.of(
+//                "token", token,
+//                "userId", user.getId()
+//        ));
+        return ResponseEntity.ok(token);
     }
 
 }
