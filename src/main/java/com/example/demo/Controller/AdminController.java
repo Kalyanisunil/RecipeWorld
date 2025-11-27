@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class AdminController {
 
-    @GetMapping("/home")
+    @GetMapping("/admin")
     public String home() {
         return "Admin";
     }
@@ -16,4 +16,6 @@ public class AdminController {
     public String login() {
         return "Login";
     }
+
+
 }
